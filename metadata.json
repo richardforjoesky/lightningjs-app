@@ -1,0 +1,6 @@
+{
+  "name": "Playground app",
+  "identifier": "com.me.playground",
+  "version": "1.0.0",
+  "icon": "./static/icon.png"
+}

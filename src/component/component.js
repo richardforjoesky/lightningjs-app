@@ -16,16 +16,16 @@ export class MyComponent extends Lightning.Component {
         },
       },
       MyBlueCube: {
-        x: 960,
+        x: 800,
         y: 800,
         w: 100,
         h: 100,
         rect: true,
         color: 0xff0034dd,
-        text: 'template - text',
+        text: 'Text',
       },
       MyGreenCube: {
-        x: 1080,
+        x: 800,
         y: 800,
         w: 100,
         h: 100,
@@ -64,17 +64,11 @@ export class MyComponent extends Lightning.Component {
     this.tag('Button').patch({ color: 0xff0000ff })
   }
 
-  _handleEnter() {
-    // Navigate to home route when enter is pressed
-    Router.navigate('home')
-  }
-
   _build() {
-    this.tag('MyBlueCube').text = 'template - build - text'
+    this.tag('MyBlueCube').text = 'TEST'
   }
 
   _setup() {
-    this.tag('MyBlueCube').x = 1090
     Router.startRouter(routes, this)
   }
 
@@ -109,20 +103,13 @@ export class MyComponent extends Lightning.Component {
   static _states() {
     return [
       class MyBlueState extends this {
-        $exit() {
+        _handleEnter() {
           this._blueCubeAnimation.pause()
-        }
-        $handleEnter() {
-          console.log('enter')
-          this._blueCubeAnimation.play()
         }
       },
       class MyGreenState extends this {
         _handleEnter() {
           this._greenCubeAnimation.play()
-        }
-        $exit() {
-          this._greenCubeAnimation.pause()
         }
       },
     ]

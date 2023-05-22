@@ -151,13 +151,13 @@ export default class Home extends Lightning.Component {
     this.tag('LilLightning').patch({ x: 1200 })
   }
 
-  _handleUp() {
-    Router.navigate('home/browse')
-  }
+  // _handleUp() {
+  //   Router.navigate('home/browse')
+  // }
 
-  _handleDown() {
-    this.tag('MyComponentInstance').setFocus(true)
-  }
+  // _handleDown() {
+  //   this.tag('MyComponentInstance').setFocus(true)
+  // }
 
   pageTransition() {
     return 'up'

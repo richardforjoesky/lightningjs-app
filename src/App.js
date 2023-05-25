@@ -8,7 +8,9 @@ export default class App extends Router.App {
    * - App instance (optional)
    */
   _setup() {
-    Router.startRouter(routes)
+    // initFactory(this.stage);
+    //     Router.startRouter(routes, this);
+    Router.startRouter(routes, this)
   }
   _handleAppClose() {
     this.application.closeApp()

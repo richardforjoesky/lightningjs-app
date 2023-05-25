@@ -16,12 +16,32 @@ export default class Browse extends Lightning.Component {
           fontFace: 'Bold',
           fontSize: 128,
         },
+        Poster: {
+          src: 'image.png',
+        },
+        Score: {
+          Imdb: {
+            text: { text: '5/7' },
+          },
+        },
+        ContextMenu: {
+          Play: {},
+          Record: {},
+          SetReminder: {},
+        },
+        longpress: {
+          up: 700,
+          down: 1500,
+          enter: 800,
+        },
       },
       Cloud: {
         src: Utils.asset('images/cloud.png'),
       },
     }
   }
+
+  // https://lightningjs.io/examples/#/advanced/slider
 
   _handleRight() {
     Router.navigate('account')
@@ -43,6 +63,14 @@ export default class Browse extends Lightning.Component {
 
   _active() {
     this.animation.start()
+  }
+
+  _handleDownLong() {
+    // 1.5s
+  }
+
+  _handleUpLong() {
+    // 1.5s
   }
 
   pageTransition() {

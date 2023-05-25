@@ -32,6 +32,10 @@ export default class Error extends Lightning.Component {
     }
   }
 
+  get id() {
+    return 'ErrorPage'
+  }
+
   _handleEnter() {
     Router.navigate('home')
   }

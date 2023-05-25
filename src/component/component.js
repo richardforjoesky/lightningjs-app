@@ -17,36 +17,19 @@ export class MyComponent extends Lightning.Component {
       },
       MyBlueCube: {
         x: 800,
-        y: 800,
+        y: 900,
         w: 100,
         h: 100,
         rect: true,
         color: 0xff0034dd,
-        text: 'Text',
       },
       MyGreenCube: {
-        x: 800,
-        y: 800,
+        x: 900,
+        y: 900,
         w: 100,
         h: 100,
         rect: true,
         color: 0xff24dd00,
-      },
-      Button: {
-        rect: true,
-        w: 200,
-        h: 50,
-        color: 0xff0000ff, // Blue color
-        Label: {
-          x: 100,
-          y: 25,
-          mount: 0.5,
-          text: {
-            text: 'Button',
-            fontFace: 'Source Sans Pro',
-            textAlign: 'center',
-          },
-        },
       },
     }
   }
@@ -55,17 +38,8 @@ export class MyComponent extends Lightning.Component {
     console.log(this)
   }
 
-  _focus() {
-    // eslint-disable-next-line prettier/prettier
-    this.tag('Button').patch({ color: 0xff87CEEB })
-  }
-
-  _unfocus() {
-    this.tag('Button').patch({ color: 0xff0000ff })
-  }
-
   _build() {
-    this.tag('MyBlueCube').text = 'TEST'
+    // this.tag('MyBlueCube').text = 'TEST'
   }
 
   _setup() {
@@ -90,26 +64,44 @@ export class MyComponent extends Lightning.Component {
       duration: 3,
       repeat: -1,
       stopMethod: 'immediate',
-      actions: [{ p: 'rotation', v: { 0: { v: 0, sm: 0 }, 1: { v: -Math.PI * 2, sm: 0 } } }],
+      actions: [
+        {
+          p: 'rotation',
+          v: { 0: { v: 0, sm: 0 }, 1: { v: -Math.PI * 2, sm: 0 } },
+        },
+      ],
     })
-    this._greenCubeAnimation = this.tag('MyGreenCube').animation({
-      duration: 3,
-      repeat: -1,
-      stopMethod: 'immediate',
-      actions: [{ p: 'rotation', v: { 0: { v: 0, sm: 0 }, 1: { v: Math.PI * 2, sm: 0 } } }],
-    })
+
+    this._greenCubeAnimation = this.tag('MyGreenCube')
+      .animation({
+        duration: 3,
+        repeat: -1,
+        stopMethod: 'immediate',
+        actions: [
+          {
+            p: 'rotation',
+            v: { 0: { v: 0, sm: 0 }, 1: { v: Math.PI * 2, sm: 0 } },
+          },
+        ],
+      })
+      .start()
   }
 
   static _states() {
+    // returns array of classes
     return [
       class MyBlueState extends this {
-        _handleEnter() {
+        call() {
+          console.log('MyBlueState')
           this._blueCubeAnimation.pause()
+          this._greenCubeAnimation.play()
         }
       },
       class MyGreenState extends this {
-        _handleEnter() {
-          this._greenCubeAnimation.play()
+        call() {
+          console.log('MyGreenState')
+          this._blueCubeAnimation.play()
+          this._greenCubeAnimation.pause()
         }
       },
     ]

@@ -1,6 +1,6 @@
-import { Lightning, Router, Utils } from '@lightningjs/sdk'
+import { Lightning, Utils } from '@lightningjs/sdk'
 import { MyComponent } from './../component/component'
-
+import { Button } from '../component/buttonComponent'
 export default class Home extends Lightning.Component {
   static getFonts() {
     return [{ family: 'Regular', url: Utils.asset('fonts/Roboto-Regular.ttf') }]
@@ -38,6 +38,7 @@ export default class Home extends Lightning.Component {
         mountY: 1,
         x: 960,
         y: 600,
+        alpha: 0,
         src: Utils.asset('images/logo.png'),
       },
       Text: {
@@ -51,7 +52,11 @@ export default class Home extends Lightning.Component {
           textColor: 0xbbffffff,
         },
       },
-      LilLightning: { x: 1000, y: 100, src: Utils.asset('images/bad-experience.png') },
+      LilLightning: {
+        x: 1000,
+        y: 100,
+        src: Utils.asset('images/bad-experience.png'),
+      },
       RectangleDefault: {
         x: 100,
         y: 100,
@@ -66,6 +71,12 @@ export default class Home extends Lightning.Component {
         h: 100,
         rect: true,
         color: 0xff1c27bc,
+        shader: {
+          type: Lightning.shaders.RoundedRectangle,
+          topLeft: 70,
+          stroke: 10,
+          strokeColor: 0xffffffff,
+        },
       },
       RectangleWithGradientTopBottom: {
         x: 100,
@@ -110,7 +121,27 @@ export default class Home extends Lightning.Component {
         type: MyComponent,
         someData: { test: 'test' },
       },
+      LeftButton: {
+        mount: 0.5,
+        x: 820,
+        y: 620,
+        type: Button,
+        label: 'Left',
+        someData: { test: 'test' },
+      },
+      RightButton: {
+        mount: 0.5,
+        x: 1100,
+        y: 620,
+        type: Button,
+        label: 'Right',
+        someData: { test: 'test' },
+      },
     }
+  }
+
+  get id() {
+    return 'HomePage'
   }
 
   set persist(args) {
@@ -119,6 +150,7 @@ export default class Home extends Lightning.Component {
 
   _init() {
     console.log('INIT')
+    this._setState('LeftButton')
     // Tags are used to reference objects inside a template.
     console.log('BACKGROUND', this.tag('Background'))
     this.myFunction()
@@ -139,11 +171,27 @@ export default class Home extends Lightning.Component {
         ],
       })
       .start()
+
+    this._animationDemo = this.tag('RectangleWithColor').animation({
+      duration: 2,
+      repeat: -1,
+      actions: [
+        { p: 'shader.fillColor', v: { 0: 0xffffffff, 0.5: 0xff000000, 1: 0xffffffff } },
+        { p: 'shader.topLeft', v: { 0: 70, 0.5: 0, 1: 70 } },
+      ],
+    })
   }
   myFunction() {
     console.log('MY-FUNCTION')
   }
+
+  _active() {
+    this._animationDemo.start()
+  }
+
   _handleLeft() {
+    // this.tag('Logo').setSmooth('x', 960)
+    this.tag('Logo').setSmooth('alpha', 1, { duration: 1, delay: 1.5 })
     this.tag('LilLightning').patch({ x: 900 })
   }
 
@@ -151,15 +199,28 @@ export default class Home extends Lightning.Component {
     this.tag('LilLightning').patch({ x: 1200 })
   }
 
-  // _handleUp() {
-  //   Router.navigate('home/browse')
-  // }
-
-  // _handleDown() {
-  //   this.tag('MyComponentInstance').setFocus(true)
-  // }
-
   pageTransition() {
     return 'up'
+  }
+
+  static _states() {
+    return [
+      class LeftButton extends this {
+        _getFocused() {
+          return this.tag('LeftButton')
+        }
+        _handleRight() {
+          this._setState('RightButton')
+        }
+      },
+      class RightButton extends this {
+        _getFocused() {
+          return this.tag('RightButton')
+        }
+        _handleLeft() {
+          this._setState('LeftButton')
+        }
+      },
+    ]
   }
 }

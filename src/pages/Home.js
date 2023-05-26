@@ -1,6 +1,7 @@
 import { Lightning, Utils } from '@lightningjs/sdk'
 import { MyComponent } from './../component/component'
-import { Button } from '../component/buttonComponent'
+import { ButtonSmall } from '@lightningjs/ui-components'
+
 export default class Home extends Lightning.Component {
   static getFonts() {
     return [{ family: 'Regular', url: Utils.asset('fonts/Roboto-Regular.ttf') }]
@@ -11,7 +12,8 @@ export default class Home extends Lightning.Component {
       Background: {
         w: 1920,
         h: 1080,
-        color: 0xfffbb03b,
+        colorTop: 0xffffeeff,
+        colorBottom: 0xff2f00ff,
         src: Utils.asset('images/background.png'),
       },
       Header: {
@@ -125,16 +127,16 @@ export default class Home extends Lightning.Component {
         mount: 0.5,
         x: 820,
         y: 620,
-        type: Button,
-        label: 'Left',
+        type: ButtonSmall,
+        title: 'Left',
         someData: { test: 'test' },
       },
       RightButton: {
         mount: 0.5,
         x: 1100,
         y: 620,
-        type: Button,
-        label: 'Right',
+        type: ButtonSmall,
+        title: 'Right',
         someData: { test: 'test' },
       },
     }

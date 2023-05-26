@@ -1,13 +1,17 @@
 import { Settings, Lightning, Router, Utils, Metrics } from '@lightningjs/sdk'
 
+let backgroundAnimation = ''
 export default class Boot extends Lightning.Component {
   static _template() {
     const timingFunction = 'cubic-bezier(0.20, 1.00, 0.80, 1.00)'
     return {
-      rect: true,
-      w: 1920,
-      h: 1080,
-      color: 0x6b6b6b6b,
+      Background: {
+        rect: true,
+        w: 1920,
+        h: 1080,
+        colorTop: 0xffffffff,
+        colorBottom: 0x00000000,
+      },
       Header: {
         _testId: 'BOOT_TITLE',
         mount: 0.5,
@@ -69,6 +73,14 @@ export default class Boot extends Lightning.Component {
     Metrics.app.ready()
     Metrics.page.leave('Boot', { user: 'me' })
 
+    backgroundAnimation = this.tag('Background').animation({
+      duration: 5,
+      repeat: -1,
+      actions: [
+        { p: 'color', v: { 0: 0xfffee00, 0.1: 0xff25e8a4, 0.5: 0xff027ed6, 1: 0xffffee00 } },
+      ],
+    })
+
     this.tag('Cloud').x = -this.tag('Cloud').renderWidth
 
     this.tag('Spinner').on('txLoaded', () => {
@@ -121,5 +133,13 @@ export default class Boot extends Lightning.Component {
 
   _inactive() {
     this._spinnerAnimation.stop()
+  }
+
+  _handleDown() {
+    backgroundAnimation.start()
+  }
+
+  _handleUp() {
+    backgroundAnimation.stop()
   }
 }

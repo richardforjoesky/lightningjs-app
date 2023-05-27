@@ -1,6 +1,7 @@
-import { Lightning, Router, Utils } from '@lightningjs/sdk'
+import { Lightning } from '@lightningjs/sdk'
+import { ListItems } from '../component/listComponent'
 
-export default class Browse extends Lightning.Component {
+export default class List extends Lightning.Component {
   static _template() {
     return {
       rect: true,
@@ -16,15 +17,31 @@ export default class Browse extends Lightning.Component {
           fontFace: 'Bold',
           fontSize: 128,
         },
+        List: {
+          y: 200,
+          flex: { direction: 'row' },
+          children: [
+            {
+              type: ListItems,
+              Label: { text: { text: 'Item 1' } },
+            },
+            {
+              type: ListItems,
+              x: 100,
+              Label: { text: { text: 'Item 2' } },
+            },
+            {
+              type: ListItems,
+              x: 200,
+              Label: { text: { text: 'Item 3' } },
+            },
+          ],
+        },
         Poster: {
           src: 'image.png',
         },
-        Score: {
-          Imdb: {
-            text: { text: '5/7' },
-          },
-        },
         ContextMenu: {
+          y: 200,
           Play: {},
           Record: {},
           SetReminder: {},
@@ -35,34 +52,23 @@ export default class Browse extends Lightning.Component {
           enter: 800,
         },
       },
-      Cloud: {
-        src: Utils.asset('images/cloud.png'),
-      },
     }
   }
 
   // https://lightningjs.io/examples/#/advanced/slider
 
-  _handleRight() {
-    Router.navigate('account')
-  }
-
   _init() {
     // Initialize the cloud position to the left of the screen
-    this.tag('Cloud').x = -this.tag('Cloud').renderWidth
-
-    // Create an animation
-    this.animation = this.tag('Cloud').animation({
-      duration: 10, // The duration of the animation in seconds. Adjust to your liking.
-      repeat: -1, // Repeat indefinitely
-      actions: [
-        { p: 'x', v: { 0: -this.tag('Cloud').renderWidth, 1: this.stage.w } }, // Moves the cloud from the left of the screen to the right
-      ],
-    })
   }
 
-  _active() {
-    this.animation.start()
+  _active() {}
+
+  _handleLeft() {}
+
+  _handleRight() {}
+
+  _getFocused() {
+    return this.tag('List').element
   }
 
   _handleDownLong() {

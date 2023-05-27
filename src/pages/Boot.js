@@ -37,7 +37,7 @@ export default class Boot extends Lightning.Component {
         alpha: 0.001,
         color: 0xaaffffff,
         transitions: {
-          alpha: { duration: 1, timingFunction: 'cubic-bezier(0.20, 1.00, 0.80, 1.00)' },
+          alpha: { duration: 1, timingFunction },
         },
       },
       Footer: {
@@ -62,7 +62,7 @@ export default class Boot extends Lightning.Component {
 
   _handleEnter() {
     console.log('INSPECTOR', Settings.get('platform', 'inspector'))
-    Router.resume()
+    Router.navigate('home', false)
   }
 
   _init() {
@@ -126,6 +126,10 @@ export default class Boot extends Lightning.Component {
         { p: 'x', v: { 0: -this.tag('Cloud').renderWidth, 1: this.stage.w } }, // Moves the cloud from the left of the screen to the right
       ],
     })
+
+    setTimeout(() => {
+      Router.navigate('home', false)
+    }, 6000)
   }
   _active() {
     this.cloudAnimation.start()

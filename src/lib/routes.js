@@ -1,5 +1,5 @@
 // we import all the pages that we want to add to our app
-import { Home, Boot, Browse, Error } from '../pages'
+import { Home, Boot, List, Error } from '../pages'
 
 export default {
   boot: (params) => {
@@ -12,9 +12,17 @@ export default {
   },
   // First we define a root, this is the hash were the browser will point to
   // at the moment that you boot your app
-  root: 'home',
+  root: 'boot',
+
   // Next we can define the rest of our routes
   routes: [
+    {
+      // this is a one level deep route.
+      path: 'boot',
+      // define the attached Component that the Router will show
+      // on this route. If configured the Router will create an instance
+      component: Boot,
+    },
     {
       // this is a one level deep route.
       path: 'home',
@@ -28,8 +36,8 @@ export default {
     },
     {
       // we can specify deeper route levels
-      path: 'browse',
-      component: Browse,
+      path: 'list',
+      component: List,
     },
     {
       path: '*',
@@ -45,6 +53,7 @@ export default {
     },
   ],
   beforeEachRoute: async (from, to) => {
+    console.log('beforeEachRoute', from, to)
     return true
   },
 }

@@ -11,6 +11,8 @@ export default class App extends Router.App {
   _setup() {
     // initFactory(this.stage);
     //     Router.startRouter(routes, this);
+    console.log('[routes]', routes)
+
     Router.startRouter(routes, this)
   }
   _handleAppClose() {

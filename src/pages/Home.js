@@ -1,4 +1,4 @@
-import { Lightning, Utils } from '@lightningjs/sdk'
+import { Router, Lightning, Utils } from '@lightningjs/sdk'
 import { MyComponent } from './../component/component'
 import { ButtonSmall } from '@lightningjs/ui-components'
 
@@ -201,6 +201,9 @@ export default class Home extends Lightning.Component {
     this.tag('LilLightning').patch({ x: 1200 })
   }
 
+  _handleDown() {
+    Router.navigate('list', false)
+  }
   pageTransition() {
     return 'up'
   }

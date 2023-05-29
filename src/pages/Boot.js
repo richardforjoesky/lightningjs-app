@@ -20,7 +20,7 @@ export default class Boot extends Lightning.Component {
         y: 340,
         text: {
           _testId: 'BOOT_TITLE_TEXT',
-          text: 'Boot Page',
+          text: 'DEMO',
           fontFace: 'Bold',
           fontSize: 256,
         },
@@ -49,7 +49,7 @@ export default class Boot extends Lightning.Component {
           x: 960,
           y: 980,
           text: {
-            text: 'press [enter] to resume to link / deeplink',
+            text: 'press [enter] to resume',
             fontFace: 'Regular',
           },
         },
@@ -61,9 +61,25 @@ export default class Boot extends Lightning.Component {
     return 'boot-page'
   }
 
+  _active() {
+    this.cloudAnimation.start()
+  }
+
+  _inactive() {
+    this._spinnerAnimation.stop()
+  }
+
   _handleEnter() {
     console.log('INSPECTOR', Settings.get('platform', 'inspector'))
     Router.navigate('menu', false)
+  }
+
+  _handleDown() {
+    backgroundAnimation.start()
+  }
+
+  _handleUp() {
+    backgroundAnimation.stop()
   }
 
   _init() {
@@ -83,6 +99,15 @@ export default class Boot extends Lightning.Component {
     })
 
     this.tag('Cloud').x = -this.tag('Cloud').renderWidth
+
+    // Create an animation
+    this.cloudAnimation = this.tag('Cloud').animation({
+      duration: 10, // The duration of the animation in seconds. Adjust to your liking.
+      repeat: -1, // Repeat indefinitely
+      actions: [
+        { p: 'x', v: { 0: -this.tag('Cloud').renderWidth, 1: this.stage.w } }, // Moves the cloud from the left of the screen to the right
+      ],
+    })
 
     this.tag('Spinner').on('txLoaded', () => {
       this.tag('Spinner').setSmooth('alpha', 1)
@@ -119,32 +144,9 @@ export default class Boot extends Lightning.Component {
         },
       ],
     })
-    // Create an animation
-    this.cloudAnimation = this.tag('Cloud').animation({
-      duration: 10, // The duration of the animation in seconds. Adjust to your liking.
-      repeat: -1, // Repeat indefinitely
-      actions: [
-        { p: 'x', v: { 0: -this.tag('Cloud').renderWidth, 1: this.stage.w } }, // Moves the cloud from the left of the screen to the right
-      ],
-    })
 
-    setTimeout(() => {
-      Router.navigate('menu', false)
-    }, 6000)
-  }
-  _active() {
-    this.cloudAnimation.start()
-  }
-
-  _inactive() {
-    this._spinnerAnimation.stop()
-  }
-
-  _handleDown() {
-    backgroundAnimation.start()
-  }
-
-  _handleUp() {
-    backgroundAnimation.stop()
+    // setTimeout(() => {
+    //   Router.navigate('menu', false)
+    // }, 6000)
   }
 }

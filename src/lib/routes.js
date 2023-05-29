@@ -3,10 +3,10 @@ import { Home, Boot, List, Error, Menu } from '../pages'
 
 export default {
   boot: (params) => {
-    console.log(params)
-    return new Promise((resolve, reject) => {
-      resolve()
-    })
+    console.log('BOOT', params)
+    // return new Promise((resolve, reject) => {
+    //   resolve('boot')
+    // })
     // boot request will always fire
     // on root and deeplink
   },

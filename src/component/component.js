@@ -34,25 +34,13 @@ export class MyComponent extends Lightning.Component {
     }
   }
 
-  _construct() {
-    console.log(this)
-  }
-
-  _build() {
-    // this.tag('MyBlueCube').text = 'TEST'
-  }
-
-  _setup() {
-    Router.startRouter(routes, this)
-  }
-
-  _handleUp() {
-    console.log('up')
+  _handleLeft() {
+    console.log('Left')
     this._setState('MyBlueState')
   }
 
-  _handleDown() {
-    console.log('down')
+  _handleRight() {
+    console.log('Right')
     this._setState('MyGreenState')
   }
 
@@ -72,35 +60,35 @@ export class MyComponent extends Lightning.Component {
       ],
     })
 
-    this._greenCubeAnimation = this.tag('MyGreenCube')
-      .animation({
-        duration: 3,
-        repeat: -1,
-        stopMethod: 'immediate',
-        actions: [
-          {
-            p: 'rotation',
-            v: { 0: { v: 0, sm: 0 }, 1: { v: Math.PI * 2, sm: 0 } },
-          },
-        ],
-      })
-      .start()
+    this._greenCubeAnimation = this.tag('MyGreenCube').animation({
+      duration: 3,
+      repeat: -1,
+      stopMethod: 'immediate',
+      actions: [
+        {
+          p: 'rotation',
+          v: { 0: { v: 0, sm: 0 }, 1: { v: Math.PI * 2, sm: 0 } },
+        },
+      ],
+    })
   }
 
   static _states() {
     // returns array of classes
     return [
       class MyBlueState extends this {
-        call() {
-          console.log('MyBlueState')
+        $enter(event) {
+          this._blueCubeAnimation.play()
+        }
+        $exit() {
           this._blueCubeAnimation.pause()
-          this._greenCubeAnimation.play()
         }
       },
       class MyGreenState extends this {
-        call() {
-          console.log('MyGreenState')
-          this._blueCubeAnimation.play()
+        $enter() {
+          this._greenCubeAnimation.play()
+        }
+        $exit() {
           this._greenCubeAnimation.pause()
         }
       },

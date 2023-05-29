@@ -1,5 +1,5 @@
 // we import all the pages that we want to add to our app
-import { Home, Boot, List, Error } from '../pages'
+import { Home, Boot, List, Error, Games } from '../pages'
 
 export default {
   boot: (params) => {
@@ -38,6 +38,11 @@ export default {
       // we can specify deeper route levels
       path: 'list',
       component: List,
+    },
+    {
+      // we can specify deeper route levels
+      path: 'games',
+      component: Games,
     },
     {
       path: '*',

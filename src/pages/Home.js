@@ -204,6 +204,10 @@ export default class Home extends Lightning.Component {
   _handleDown() {
     Router.navigate('list', false)
   }
+
+  _handleUp() {
+    Router.navigate('games', false)
+  }
   pageTransition() {
     return 'up'
   }

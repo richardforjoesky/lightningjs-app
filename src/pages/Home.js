@@ -191,16 +191,6 @@ export default class Home extends Lightning.Component {
     this._animationDemo.start()
   }
 
-  _handleLeft() {
-    // this.tag('Logo').setSmooth('x', 960)
-    this.tag('Logo').setSmooth('alpha', 1, { duration: 1, delay: 1.5 })
-    this.tag('LilLightning').patch({ x: 900 })
-  }
-
-  _handleRight() {
-    this.tag('LilLightning').patch({ x: 1200 })
-  }
-
   _handleBack() {
     Router.navigate('menu', false)
   }
@@ -215,6 +205,8 @@ export default class Home extends Lightning.Component {
           return this.tag('LeftButton')
         }
         _handleRight() {
+          this.tag('Logo').setSmooth('alpha', 0, { duration: 1, delay: 0.5 })
+          this.tag('LilLightning').patch({ x: 1200 })
           this._setState('RightButton')
         }
       },
@@ -223,6 +215,8 @@ export default class Home extends Lightning.Component {
           return this.tag('RightButton')
         }
         _handleLeft() {
+          this.tag('Logo').setSmooth('alpha', 1, { duration: 1, delay: 0.5 })
+          this.tag('LilLightning').patch({ x: 1000 })
           this._setState('LeftButton')
         }
       },

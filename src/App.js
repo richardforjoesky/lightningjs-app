@@ -17,6 +17,6 @@ export default class App extends Router.App {
   }
 
   _handleAppClose() {
-    this.application.closeApp()
+    // this.application.closeApp()
   }
 }

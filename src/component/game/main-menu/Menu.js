@@ -9,7 +9,7 @@ export default class Menu extends Lightning.Component {
       },
       FocusIndicator: {
         y: 5,
-        text: { text: '>', fontFace: 'Roboto-Regular' },
+        text: { text: '[]', fontFace: 'Roboto-Regular' },
       },
     }
   }

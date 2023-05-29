@@ -1,4 +1,4 @@
-import { Lightning } from '@lightningjs/sdk'
+import { Lightning, Utils, Router } from '@lightningjs/sdk'
 import { ListItems } from '../component/listComponent'
 
 export default class List extends Lightning.Component {
@@ -8,6 +8,7 @@ export default class List extends Lightning.Component {
       w: 1920,
       h: 1080,
       color: 0xff000000,
+      src: Utils.asset('images/background.png'),
       Header: {
         mount: 0.5,
         x: 960,
@@ -66,6 +67,10 @@ export default class List extends Lightning.Component {
   _handleLeft() {}
 
   _handleRight() {}
+
+  _handleBack() {
+    Router.navigate('menu', false)
+  }
 
   _getFocused() {
     return this.tag('List').element

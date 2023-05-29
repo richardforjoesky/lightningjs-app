@@ -11,6 +11,7 @@ export default class Boot extends Lightning.Component {
         h: 1080,
         colorTop: 0xffffffff,
         colorBottom: 0x00000000,
+        src: Utils.asset('images/background.png'),
       },
       Header: {
         _testId: 'BOOT_TITLE',
@@ -62,7 +63,7 @@ export default class Boot extends Lightning.Component {
 
   _handleEnter() {
     console.log('INSPECTOR', Settings.get('platform', 'inspector'))
-    Router.navigate('home', false)
+    Router.navigate('menu', false)
   }
 
   _init() {
@@ -128,7 +129,7 @@ export default class Boot extends Lightning.Component {
     })
 
     setTimeout(() => {
-      Router.navigate('home', false)
+      Router.navigate('menu', false)
     }, 6000)
   }
   _active() {

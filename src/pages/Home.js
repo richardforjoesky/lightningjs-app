@@ -201,12 +201,8 @@ export default class Home extends Lightning.Component {
     this.tag('LilLightning').patch({ x: 1200 })
   }
 
-  _handleDown() {
-    Router.navigate('list', false)
-  }
-
-  _handleUp() {
-    Router.navigate('games', false)
+  _handleBack() {
+    Router.navigate('menu', false)
   }
   pageTransition() {
     return 'up'

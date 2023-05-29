@@ -1,4 +1,4 @@
-import { Lightning, Router } from '@lightningjs/sdk'
+import { Lightning, Router, Utils } from '@lightningjs/sdk'
 
 export default class Error extends Lightning.Component {
   static _template() {
@@ -7,6 +7,7 @@ export default class Error extends Lightning.Component {
       w: 1920,
       h: 1080,
       color: 0xfff1465b,
+      src: Utils.asset('images/background.png'),
       Header: {
         mount: 0.5,
         x: 960,

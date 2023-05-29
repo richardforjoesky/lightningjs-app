@@ -24,7 +24,7 @@ export default class About extends Lightning.Component {
           y: 100,
           w: 750,
           text: {
-            text: 'This work was developed using LightningJS (https://lightningjs.io) by Rui Lebre (https://ruilebre.com and https://github.com/rlebre).',
+            text: 'Lighting playground using work developed using LightningJS (https://lightningjs.io) by Rui Lebre (https://ruilebre.com and https://github.com/rlebre).',
             fontSize: 25,
             lineHeight: 55,
             paddingLeft: 0,

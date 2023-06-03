@@ -1,25 +1,34 @@
 import { Lightning, Utils, Router } from '@lightningjs/sdk'
 import { ListItems } from '../component/listComponent'
+import { Main } from '../component/examples/Main'
 
 export default class List extends Lightning.Component {
   static _template() {
     return {
-      rect: true,
-      w: 1920,
-      h: 1080,
-      color: 0xff000000,
-      src: Utils.asset('images/background.png'),
+      Background: {
+        rect: true,
+        w: 1920,
+        h: 1080,
+        src: Utils.asset('images/Background-old-field-harvest.jpg'),
+      },
+      Overlay: {
+        rect: true,
+        w: 1920,
+        h: 1080,
+        colorTop: 0xffffffff,
+        color: 0x19000000,
+      },
       Header: {
         mount: 0.5,
         x: 960,
         y: 340,
         text: {
-          text: 'Browse Page',
+          text: 'Harvesting Innovation',
           fontFace: 'Bold',
           fontSize: 128,
         },
         List: {
-          y: 200,
+          y: 150,
           flex: { direction: 'row' },
           children: [
             {
@@ -37,20 +46,6 @@ export default class List extends Lightning.Component {
               Label: { text: { text: 'Item 3' } },
             },
           ],
-        },
-        Poster: {
-          src: 'image.png',
-        },
-        ContextMenu: {
-          y: 200,
-          Play: {},
-          Record: {},
-          SetReminder: {},
-        },
-        longpress: {
-          up: 700,
-          down: 1500,
-          enter: 800,
         },
       },
     }
@@ -73,7 +68,7 @@ export default class List extends Lightning.Component {
   }
 
   _getFocused() {
-    return this.tag('List').element
+    return this.tag('List')
   }
 
   _handleDownLong() {

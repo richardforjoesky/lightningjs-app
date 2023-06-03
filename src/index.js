@@ -2,7 +2,6 @@ import { Launch } from '@lightningjs/sdk'
 import App from './App.js'
 
 export default function () {
-  // const options = { stage: { w: 1920, h: 1080, clearColor: 0xff223366 } }
   const keys = {
     keys: {
       38: 'Up',
@@ -18,5 +17,7 @@ export default function () {
       83: 'Search',
     },
   }
+  // const options = { stage: { forceTxCanvasSource: true, memoryPressure: 24e6, canvas2d: true, w: 1920, h: 1080, clearColor: 0xff223366 }, ...keys }
+  console.log('Launch', ...arguments)
   return Launch(App, ...arguments)
 }

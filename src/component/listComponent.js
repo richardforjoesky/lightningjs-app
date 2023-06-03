@@ -5,8 +5,10 @@ export class ListItems extends Lightning.Component {
   static _template() {
     return {
       type: ListItem,
+      x: 10,
+      y: 10,
       w: 200,
-      h: 300,
+      h: 200,
       color: 0xff0000ff,
       Image: {
         src: Utils.asset('images/leaf.png'),

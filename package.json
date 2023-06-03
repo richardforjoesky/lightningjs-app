@@ -15,7 +15,8 @@
   },
   "scripts": {
     "prepare": "husky install",
-    "dev": "lng build && lng serve"
+    "dev": "lng build && lng serve",
+    "watch": "lng watch & lng serve"
   },
   "devDependencies": {
     "@babel/core": "^7.7.2",
